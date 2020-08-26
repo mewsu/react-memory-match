@@ -1,7 +1,7 @@
 {
-  "name": "",
+  "name": "react-memory-match",
   "version": "1.0.0",
-  "description": "",
+  "description": "A React matching game",
   "main": "src/App.js",
   "dependencies": {
     "react": "^16.8.4",
@@ -9,7 +9,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
