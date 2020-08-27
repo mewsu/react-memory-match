@@ -29,10 +29,50 @@ body {
   margin: 20px;
   border: 5px solid white;
   color: white;
-  background-color: slategray;
+  background-color: #c4ced8;
   font-size: 40px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#game-grid button {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  padding: 10px;
+}
+
+.boo {
+  background-image: url("./img/boo.png");
+}
+
+.coin {
+  background-image: url("./img/coin.png");
+}
+
+.egg {
+  background-image: url("./img/egg.png");
+}
+
+.flower {
+  background-image: url("./img/flower.png");
+}
+
+.koopa {
+  background-image: url("./img/koopa.png");
+}
+
+.mushroom {
+  background-image: url("./img/mushroom.png");
+}
+
+.shell {
+  background-image: url("./img/shell.png");
+}
+
+.star {
+  background-image: url("./img/star.png");
 }

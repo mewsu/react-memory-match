@@ -4,7 +4,13 @@ import ReactDOM from "react-dom";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { score: 0, chances: 3, clickedBlocks: [], revealed: null };
+    this.state = {
+      score: 0,
+      chances: 3,
+      clickedBlocks: [],
+      revealed: null,
+      isClickAllowed: true
+    };
     this.possibleMatchIds = [
       // 4 x 4, 8 pairs
       1,
@@ -28,13 +34,16 @@ class App extends React.Component {
   }
 
   handleBlockClick = (blockIdx, matchId) => {
+    if (!this.state.isClickAllowed) return;
     console.log("clicked ", matchId);
     let clickedBlocks = [...this.state.clickedBlocks];
     clickedBlocks.push(blockIdx);
     this.setState({ clickedBlocks });
     if (!this.state.revealed) {
+      // first select
       this.setState({ revealed: matchId });
     } else {
+      // second select
       this.setState({
         chances: this.state.chances - 1,
         revealed: null
@@ -45,11 +54,12 @@ class App extends React.Component {
           score: this.state.score + 1
         });
       } else {
+        this.setState({ isClickAllowed: false });
         console.log("queue reset");
         setTimeout(() => {
           console.log("reset now");
-          const clickedBlocks = this.state.clickedBlocks;
           this.setState({
+            isClickAllowed: true,
             clickedBlocks: clickedBlocks.slice(0, clickedBlocks.length - 2)
           });
         }, 1000);
@@ -94,16 +104,27 @@ const GameGrid = props => {
 
 const GameBlock = props => {
   // console.log({ props });
+  const imgNames = [
+    "boo",
+    "coin",
+    "egg",
+    "flower",
+    "koopa",
+    "mushroom",
+    "shell",
+    "star"
+  ];
+
+  const css = props.isClicked ? imgNames[props.matchId - 1] : "";
+
   return (
     <button
-      className="game-block"
+      className={"game-block " + css}
       onClick={() => {
         if (!props.isClicked)
           props.handleBlockClick(props.blockIdx, props.matchId);
       }}
-    >
-      {props.isClicked ? props.matchId : ""}
-    </button>
+    ></button>
   );
 };
 
