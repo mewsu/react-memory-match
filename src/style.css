@@ -15,6 +15,7 @@ body {
   margin-top: 10%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 #game-grid {
@@ -37,13 +38,12 @@ body {
   align-items: center;
 }
 
-#game-grid button {
+/* #game-grid button {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   background-origin: content-box;
-  padding: 10px;
-}
+} */
 
 .boo {
   background-image: url("./img/boo.png");

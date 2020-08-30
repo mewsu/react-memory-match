@@ -11,7 +11,8 @@ class App extends React.Component {
       revealed: null,
       isClickAllowed: true
     };
-    this.possibleMatchIds = [
+
+    this.gridBlocks = shuffle([
       // 4 x 4, 8 pairs
       1,
       1,
@@ -29,8 +30,7 @@ class App extends React.Component {
       7,
       8,
       8
-    ];
-    this.gridBlocks = shuffle(this.possibleMatchIds); // idx = position
+    ]); // idx = position
   }
 
   handleBlockClick = (blockIdx, matchId) => {
@@ -119,12 +119,18 @@ const GameBlock = props => {
 
   return (
     <button
-      className={"game-block " + css}
+      className={"card" + (props.isClicked ? " card--flipped" : "")}
       onClick={() => {
         if (!props.isClicked)
           props.handleBlockClick(props.blockIdx, props.matchId);
       }}
-    ></button>
+    >
+      <div className="card__inner">
+        <div className="card__front"></div>
+
+        <div className={"card__back " + css}></div>
+      </div>
+    </button>
   );
 };
 
