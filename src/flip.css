@@ -8,12 +8,11 @@
 
 .card {
   perspective: 1000px;
-  margin: 10px;
+  margin: 15px;
   padding: 0;
-  border: none;
   width: 130px;
   height: 130px;
-  border: 5px solid white;
+  border: 7px solid white;
   border-radius: 10px;
   box-sizing: content-box;
 }
@@ -49,18 +48,20 @@
   justify-content: center;
   align-items: center;
   backface-visibility: hidden;
-  border-radius: 6px;
-}
+  /* border-radius: 6px; */
 
-.card__front {
-  background-color: #c4ced8;
-}
-
-.card__back {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   background-origin: content-box;
+}
+
+.card__front {
+  background-color: #c4ced8;
+  background-image: url("./img/question.png");
+}
+
+.card__back {
   padding: 10px;
-  background-color: #30ecff;
+  background-color: #f4eaea00;
 }

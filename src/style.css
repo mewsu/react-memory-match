@@ -38,13 +38,6 @@ body {
   align-items: center;
 }
 
-/* #game-grid button {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-origin: content-box;
-} */
-
 .boo {
   background-image: url("./img/boo.png");
 }
