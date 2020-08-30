@@ -4,13 +4,16 @@ import ReactDOM from "react-dom";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.initiaState = {
       score: 0,
-      chances: 3,
+      chances: 10,
       clickedBlocks: [],
       revealed: null,
-      isClickAllowed: true
+      isClickAllowed: true,
+      isGameOver: false,
+      isVictory: false
     };
+    this.state = Object.assign({}, this.initiaState);
 
     this.gridBlocks = shuffle([
       // 4 x 4, 8 pairs
@@ -45,16 +48,24 @@ class App extends React.Component {
     } else {
       // second select
       this.setState({
-        chances: this.state.chances - 1,
         revealed: null
       });
       if (this.state.revealed == matchId) {
         console.log("score!");
+        const score = this.state.score + 1;
         this.setState({
-          score: this.state.score + 1
+          score,
+          isGameOver: score >= 8,
+          isVictory: score >= 8
         });
       } else {
-        this.setState({ isClickAllowed: false });
+        const chances = this.state.chances - 1;
+        this.setState({
+          isClickAllowed: false,
+          chances,
+          isVictory: false,
+          isGameOver: chances <= 0
+        });
         console.log("queue reset");
         setTimeout(() => {
           console.log("reset now");
@@ -67,6 +78,10 @@ class App extends React.Component {
     }
   };
 
+  handleReset = () => {
+    this.setState(this.initiaState);
+  };
+
   componentDidMount() {
     console.log("did mount");
     // this.setState(this.initialState);
@@ -75,6 +90,13 @@ class App extends React.Component {
   render() {
     return (
       <div id="main-container">
+        <GameMessage
+          isGameOver={this.state.isGameOver}
+          isVictory={this.state.isVictory}
+          score={this.state.score}
+          chances={this.state.chances}
+          handleReset={this.handleReset}
+        />
         <GameGrid
           gridBlocks={this.gridBlocks}
           handleBlockClick={this.handleBlockClick}
@@ -115,7 +137,7 @@ const GameBlock = props => {
     "star"
   ];
 
-  const css = props.isClicked ? imgNames[props.matchId - 1] : "";
+  const css = imgNames[props.matchId - 1];
 
   return (
     <button
@@ -131,6 +153,35 @@ const GameBlock = props => {
         <div className={"card__back " + css}></div>
       </div>
     </button>
+  );
+};
+
+const GameMessage = props => {
+  return (
+    <div id="game-message">
+      {props.isGameOver ? (
+        props.isVictory ? (
+          <>
+            <div className="green">Full Match!</div>
+            <button className="play-again" onClick={() => props.handleReset()}>
+              Play Again?
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="red">Game Over!</div>
+            <button className="play-again" onClick={() => props.handleReset()}>
+              Try Again?
+            </button>
+          </>
+        )
+      ) : (
+        <>
+          <div>Matches: {props.score}/8</div>
+          <div>Chances: {props.chances}</div>{" "}
+        </>
+      )}
+    </div>
   );
 };
 

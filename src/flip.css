@@ -17,12 +17,6 @@
   box-sizing: content-box;
 }
 
-/* .card:hover .card__inner,
-.card:active .card__inner,
-.card:focus .card__inner {
-  transform: rotateY(180deg);
-} */
-
 .card--flipped .card__inner {
   transform: rotateY(180deg);
 }
@@ -48,7 +42,6 @@
   justify-content: center;
   align-items: center;
   backface-visibility: hidden;
-  /* border-radius: 6px; */
 
   background-position: center;
   background-size: contain;
